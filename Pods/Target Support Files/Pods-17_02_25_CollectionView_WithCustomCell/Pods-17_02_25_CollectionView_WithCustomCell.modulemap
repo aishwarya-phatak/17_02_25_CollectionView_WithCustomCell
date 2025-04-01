@@ -1,0 +1,6 @@
+framework module Pods_17_02_25_CollectionView_WithCustomCell {
+  umbrella header "Pods-17_02_25_CollectionView_WithCustomCell-umbrella.h"
+
+  export *
+  module * { export * }
+}

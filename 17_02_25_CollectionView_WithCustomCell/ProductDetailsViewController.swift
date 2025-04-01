@@ -6,24 +6,34 @@
 //
 
 import UIKit
+import SDWebImage
 
 class ProductDetailsViewController: UIViewController {
-
+    
+    @IBOutlet weak var productTitleLabel: UILabel!
+    @IBOutlet weak var productPriceLabel: UILabel!
+    
+    @IBOutlet weak var dummyImageView: UIImageView!
+    
+    var productContainer : Product?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        extractAndBindProductData()
+        extractImageUsingPodAndBind()
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    private func extractImageUsingPodAndBind(){
+        var urlString = "https://picsum.photos/seed/picsum/200/300"
+        var url = URL(string: urlString)
+        
+        dummyImageView.sd_setImage(with: url,
+                                   placeholderImage:
+                                    UIImage(named: "test_image_2"))
     }
-    */
-
+    
+    private func extractAndBindProductData(){
+        self.productTitleLabel.text = productContainer?.productTitle
+        self.productPriceLabel.text = "\(productContainer?.productPrice)"
+    }
 }

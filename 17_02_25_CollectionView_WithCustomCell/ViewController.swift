@@ -11,6 +11,8 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var productsCollectionView: UICollectionView!
     private let productCollectionViewCellIdentifier : String = "ProductCollectionViewCell"
+    private let productDetailsViewControllerIdentifier : String = "ProductDetailsViewController"
+    private var productDetailsViewController : ProductDetailsViewController?
     var productCollectionViewCell : ProductCollectionViewCell?
     var products : [Product] = []
     
@@ -41,7 +43,6 @@ class ViewController: UIViewController {
     }
 }
 
-
 extension ViewController : UICollectionViewDataSource{
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -60,4 +61,18 @@ extension ViewController : UICollectionViewDataSource{
 
 extension ViewController : UICollectionViewDelegateFlowLayout{
     
+}
+
+
+extension ViewController : UICollectionViewDelegate{
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath){
+        print(indexPath.item)
+        
+        productDetailsViewController = self.storyboard?.instantiateViewController(identifier: productDetailsViewControllerIdentifier) as! ProductDetailsViewController
+        
+        productDetailsViewController?.productContainer = products[indexPath.item]
+        
+        navigationController?.pushViewController(productDetailsViewController!, animated: true)
+    }
 }
